@@ -10,7 +10,7 @@
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
 
-        var geo = { x: 100, y: 75, r: 50 }
+        var geo = { x: 100, y: 75, r: 50, color: 'red' }
 
         function draw()
         {
@@ -23,7 +23,9 @@
 
             ctx.beginPath();
             ctx.arc(geo.x, geo.y, geo.r, 0, 2 * Math.PI);
-            ctx.stroke();
+            //ctx.stroke();
+            ctx.fillStyle = geo.color;
+            ctx.fill();
 
             geo.x++;
 
