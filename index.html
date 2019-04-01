@@ -10,23 +10,22 @@
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
 
-        var x = 100;
-        var r = 50;
+        var geo = { x: 100, y: 75, r: 50 }
 
         function draw()
         {
-            if(x > c.width + r)
+            if(geo.x > c.width + geo.r)
             {
-                x = -r;
+                geo.x = -geo.r;
             }
 
             ctx.clearRect(0, 0, c.width, c.height);
 
             ctx.beginPath();
-            ctx.arc(x, 75, r, 0, 2 * Math.PI);
+            ctx.arc(geo.x, geo.y, geo.r, 0, 2 * Math.PI);
             ctx.stroke();
 
-            x++;
+            geo.x++;
 
             window.requestAnimationFrame(draw);
         }
