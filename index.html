@@ -11,18 +11,19 @@
         var ctx = c.getContext("2d");
 
         var x = 100;
+        var r = 50;
 
         function draw()
         {
-            if(x > c.width + 50)
+            if(x > c.width + r)
             {
-                x = -50;
+                x = -r;
             }
 
             ctx.clearRect(0, 0, c.width, c.height);
 
             ctx.beginPath();
-            ctx.arc(x, 75, 50, 0, 2 * Math.PI);
+            ctx.arc(x, 75, r, 0, 2 * Math.PI);
             ctx.stroke();
 
             x++;
