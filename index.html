@@ -12,11 +12,13 @@
 
         var game = { score: 0, lives: 3, state: 'play' };
 
-        var g1 = { x: 100, y: 75, r: 10, color: 'red', speed: 1 };
-        var g2 = { x: 25, y: 25, r: 30, color: 'yellow', speed: 1 };
-        var player = { x: 32, y: c.height / 2, r: 15, color: 'green', speed: 1 };
+        var gameObjects = [];
 
-        var arrayG = [g1, g2, player];
+        gameObjects.push({ type: 'harm', x: 100, y: 75, r: 10, color: 'red', speed: 1 });
+        gameObjects.push({ type: 'benefit', x: 25, y: 25, r: 30, color: 'yellow', speed: 1 });
+        gameObjects.push({ type: 'player', x: 32, y: c.height / 2, r: 15, color: 'green', speed: 1 });
+
+        var player = gameObjects[2];
 
         window.addEventListener('keydown', function(e)
         {
@@ -43,7 +45,7 @@
         {
             ctx.clearRect(0, 0, c.width, c.height);
 
-            arrayG.forEach(function(g) {
+            gameObjects.forEach(function(g) {
                 if(g.x > c.width + g.r)
                 {
                     g.x = -g.r;
@@ -55,14 +57,27 @@
                 ctx.fillStyle = g.color;
                 ctx.fill();
 
-                if(g !== player)
+                if(g.type !== 'player')
                 {
                     g.x += g.speed;
 
                     if(colliding(player, g))
                     {
-                        game.state = 'over';
-                        console.log(game.state);
+                        if(g.type === 'harm')
+                        {
+                            game.lives--;
+
+                            if(game.lives === 0)
+                            {
+                                game.state = 'over';
+                            }
+                        }
+                        else if(g.type === 'benefit')
+                        {
+                            game.score += 100;
+                        }
+
+                        console.log(game);
                     }
                 }
             });
