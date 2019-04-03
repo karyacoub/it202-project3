@@ -12,8 +12,21 @@
 
         var g1 = { x: 100, y: 75, r: 10, color: 'red', speed: 1 };
         var g2 = { x: 25, y: 25, r: 30, color: 'yellow', speed: 1 };
+        var player = { x: 32, y: 35, r: 20, color: 'green', speed: 1 };
 
-        var arrayG = [g1, g2];
+        var arrayG = [g1, g2, player];
+
+        window.addEventListener('keydown', function(e)
+        {
+            if(e.key == 'ArrowUp')
+            {
+                player.y -= 2;
+            }
+            else if(e.key == 'ArrowDown')
+            {
+                player.y += 2;
+            }
+        });
 
         function draw()
         {
@@ -32,7 +45,10 @@
                 ctx.fillStyle = g.color;
                 ctx.fill();
 
-                g.x += g.speed;
+                if(g !== player)
+                {
+                    g.x += g.speed;
+                }
             });
 
             window.requestAnimationFrame(draw);
