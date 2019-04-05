@@ -14,14 +14,23 @@
 
         var gameObjects = [];
 
-        gameObjects.push({ type: 'harm', x: 100, y: 75, r: 10, color: 'red', speed: 1 });
-        gameObjects.push({ type: 'benefit', x: 25, y: 25, r: 30, color: 'yellow', speed: 1 });
-        gameObjects.push({ type: 'player', x: 32, y: c.height / 2, r: 15, color: 'green', speed: 1 });
-
-        var player = gameObjects[2];
-
         var background = new Image();
         background.src = 'bg.png';
+
+        var harm = new Image();
+        harm.src = 'harm.png';
+
+        var benefit = new Image();
+        benefit.src = 'benefit.png';
+
+        var playerImg = new Image();
+        playerImg.src = 'player.png';
+
+        gameObjects.push({ type: 'harm', image: harm, x: 100, y: 75, r: 10, color: 'red', speed: 1 });
+        gameObjects.push({ type: 'benefit', image: benefit, x: 25, y: 25, r: 30, color: 'yellow', speed: 1 });
+        gameObjects.push({ type: 'player', image: playerImg, x: 32, y: c.height / 2, r: 15, color: 'green', speed: 1 });
+
+        var player = gameObjects[2];
 
         window.addEventListener('keydown', function(e)
         {
@@ -57,11 +66,12 @@
                     g.y = Math.random() * c.height;
                 }
 
-                ctx.beginPath();
-                ctx.arc(g.x, g.y, g.r, 0, 2 * Math.PI);
-                ctx.fillStyle = g.color;
-                ctx.fill();
+                // draw player images
+                ctx.drawImage(g.image, g.x, g.y);
 
+                ctx.fillStyle = g.color;
+
+                // draw score and lives text
                 var score = 'Score: ' + game.score;
                 var lives = 'Lives: ' + game.lives;
                 ctx.font = '16px Arial';
