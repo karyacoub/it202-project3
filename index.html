@@ -57,6 +57,12 @@
                 ctx.fillStyle = g.color;
                 ctx.fill();
 
+                var score = 'Score: ' + game.score;
+                var lives = 'Lives: ' + game.lives;
+                ctx.font = '16px Arial';
+                ctx.fillText(score, 200, 145);
+                ctx.fillText(lives, 200, 20);
+
                 if(g.type !== 'player')
                 {
                     g.x += g.speed;
@@ -76,8 +82,6 @@
                         {
                             game.score += 100;
                         }
-
-                        console.log(game);
                     }
                 }
             });
