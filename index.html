@@ -20,6 +20,9 @@
 
         var player = gameObjects[2];
 
+        var background = new Image();
+        background.src = 'bg.png';
+
         window.addEventListener('keydown', function(e)
         {
             if(e.key == 'ArrowUp')
@@ -44,6 +47,8 @@
         function draw()
         {
             ctx.clearRect(0, 0, c.width, c.height);
+
+            ctx.drawImage(background, 0, 0, 300, 150);
 
             gameObjects.forEach(function(g) {
                 if(g.x > c.width + g.r)
@@ -89,7 +94,9 @@
             window.requestAnimationFrame(draw);
         }
 
-        window.requestAnimationFrame(draw);
+        background.onload = function() {
+            window.requestAnimationFrame(draw);
+        };
     </script> 
 
     </body>
