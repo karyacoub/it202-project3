@@ -60,9 +60,9 @@
             ctx.drawImage(background, 0, 0, c.width, c.height);
 
             gameObjects.forEach(function(g) {
-                if(g.x > c.width + g.r)
+                if(g.x < -g.r)
                 {
-                    g.x = -g.r;
+                    g.x = c.width + g.r;
                     g.y = Math.random() * c.height;
                 }
 
@@ -73,7 +73,7 @@
 
                 if(g.type !== 'player')
                 {
-                    g.x += g.speed;
+                    g.x -= g.speed;
 
                     if(colliding(player, g))
                     {
