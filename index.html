@@ -60,7 +60,7 @@
             ctx.drawImage(background, 0, 0, c.width, c.height);
 
             gameObjects.forEach(function(g) {
-                if(g.x < -g.r)
+                if(g.x < 2 * -g.r)
                 {
                     g.x = c.width + g.r;
                     g.y = Math.random() * c.height;
