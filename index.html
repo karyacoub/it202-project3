@@ -10,7 +10,6 @@
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
 
-        var game = { score: 0, lives: 3, state: 'play' };
 
         var gameObjects = [];
 
@@ -25,6 +24,8 @@
 
         var playerImg = new Image();
         playerImg.src = 'player.png';
+
+        var game = { score: 0, lives: 3, state: 'play', level: 1 };
 
         gameObjects.push({ type: 'harm', image: harm, x: 100, y: 75, r: 10, color: 'red', speed: 2, state: ''});
         gameObjects.push({ type: 'benefit', image: benefit, x: 25, y: 25, r: 20, color: 'yellow', speed: 2, state: '' });
@@ -74,7 +75,7 @@
 
                 if(g.type !== 'player')
                 {
-                    g.x -= g.speed;
+                    g.x -= g.speed * game.level;
 
                     if(colliding(player, g))
                     {
@@ -92,6 +93,11 @@
                         else if(g.type === 'benefit')
                         {
                             game.score += 100;
+
+                            if(game.score % 200 === 0)
+                            {
+                                game.level++;
+                            }
                         }
                     }
                 }
