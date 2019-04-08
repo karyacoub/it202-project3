@@ -105,6 +105,11 @@
                             if(game.score % 200 === 0)
                             {
                                 game.level++;
+                                
+                                if(game.level % 2 === 0)
+                                {
+                                    gameObjects.push({ type: 'harm', image: harm, x: 100, y: 75, r: 10, color: 'red', speed: 2, state: ''});
+                                }
                             }
                         }
                     }
