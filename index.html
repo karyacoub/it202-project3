@@ -10,7 +10,6 @@
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
 
-
         var gameObjects = [];
 
         var background = new Image();
@@ -52,6 +51,15 @@
             var distance = Math.sqrt(dx * dx + dy * dy);
 
             return distance < circle1.r + circle2.r;
+        }
+
+        function gameOver()
+        {
+            ctx.clearRect(0, 0, c.width, c.height);
+            ctx.drawImage(background, 0, 0, c.width, c.height);
+            ctx.fillStyle = "white";
+            ctx.font = '24px Arial';
+            ctx.fillText('Game Over', ((c.width / 2) - (c.width / 8)), c.height / 2);
         }
 
         function draw()
@@ -106,12 +114,19 @@
             // draw score and lives text
             var score = 'Score: ' + game.score;
             var lives = 'Lives: ' + game.lives;
-            ctx.fillStyle = "white"
+            ctx.fillStyle = "white";
             ctx.font = '24px Arial';
             ctx.fillText(score, c.width - 150, c.height - 10);
             ctx.fillText(lives, c.width - 150, c.height - (c.height - 20));
 
-            window.requestAnimationFrame(draw);
+            if(game.lives >= 0)
+            {
+                window.requestAnimationFrame(draw);
+            }
+            else
+            {
+                gameOver();
+            }
         }
 
         background.onload = function() {
