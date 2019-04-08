@@ -2,7 +2,7 @@
 <html>
     <body>
 
-    <canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+    <canvas id="myCanvas" width="800" height="400" style="border:1px solid #d3d3d3;">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
 
@@ -26,8 +26,8 @@
         var playerImg = new Image();
         playerImg.src = 'player.png';
 
-        gameObjects.push({ type: 'harm', image: harm, x: 100, y: 75, r: 10, color: 'red', speed: 1 });
-        gameObjects.push({ type: 'benefit', image: benefit, x: 25, y: 25, r: 30, color: 'yellow', speed: 1 });
+        gameObjects.push({ type: 'harm', image: harm, x: 100, y: 75, r: 10, color: 'red', speed: 3 });
+        gameObjects.push({ type: 'benefit', image: benefit, x: 25, y: 25, r: 30, color: 'yellow', speed: 3 });
         gameObjects.push({ type: 'player', image: playerImg, x: 32, y: c.height / 2, r: 15, color: 'green', speed: 1 });
 
         var player = gameObjects[2];
@@ -57,7 +57,7 @@
         {
             ctx.clearRect(0, 0, c.width, c.height);
 
-            ctx.drawImage(background, 0, 0, 300, 150);
+            ctx.drawImage(background, 0, 0, c.width, c.height);
 
             gameObjects.forEach(function(g) {
                 if(g.x > c.width + g.r)
@@ -70,13 +70,6 @@
                 ctx.drawImage(g.image, g.x, g.y);
 
                 ctx.fillStyle = g.color;
-
-                // draw score and lives text
-                var score = 'Score: ' + game.score;
-                var lives = 'Lives: ' + game.lives;
-                ctx.font = '16px Arial';
-                ctx.fillText(score, 200, 145);
-                ctx.fillText(lives, 200, 20);
 
                 if(g.type !== 'player')
                 {
@@ -100,6 +93,14 @@
                     }
                 }
             });
+
+            // draw score and lives text
+            var score = 'Score: ' + game.score;
+            var lives = 'Lives: ' + game.lives;
+            ctx.fillStyle = "white"
+            ctx.font = '24px Arial';
+            ctx.fillText(score, c.width - 150, c.height - 10);
+            ctx.fillText(lives, c.width - 150, c.height - (c.height - 20));
 
             window.requestAnimationFrame(draw);
         }
