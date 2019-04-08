@@ -26,8 +26,8 @@
         var playerImg = new Image();
         playerImg.src = 'player.png';
 
-        gameObjects.push({ type: 'harm', image: harm, x: 100, y: 75, r: 10, color: 'red', speed: 3 });
-        gameObjects.push({ type: 'benefit', image: benefit, x: 25, y: 25, r: 30, color: 'yellow', speed: 3 });
+        gameObjects.push({ type: 'harm', image: harm, x: 100, y: 75, r: 10, color: 'red', speed: 3, state: ''});
+        gameObjects.push({ type: 'benefit', image: benefit, x: 25, y: 25, r: 20, color: 'yellow', speed: 3, state: '' });
         gameObjects.push({ type: 'player', image: playerImg, x: 32, y: c.height / 2, r: 15, color: 'green', speed: 1 });
 
         var player = gameObjects[2];
@@ -60,10 +60,11 @@
             ctx.drawImage(background, 0, 0, c.width, c.height);
 
             gameObjects.forEach(function(g) {
-                if(g.x < 2 * -g.r)
+                if(g.x < 2 * -g.r || g.state === 'collision')
                 {
                     g.x = c.width + g.r;
                     g.y = Math.random() * c.height;
+                    g.state = '';
                 }
 
                 // draw player images
@@ -77,6 +78,8 @@
 
                     if(colliding(player, g))
                     {
+                        g.state = 'collision';
+
                         if(g.type === 'harm')
                         {
                             game.lives--;
